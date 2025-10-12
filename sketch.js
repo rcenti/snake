@@ -6,6 +6,10 @@ let foodY;
 let numberOfCells = 600 / GRID_SIZE;
 let randomCell ; 
 let randomCellFloor; 
+let xDir = 1;
+let yDir = 0;
+let gameOver = false
+
 
 
 
@@ -24,6 +28,8 @@ function draw() {
     background(0);
     snake();
     ellipse(foodX, foodY, GRID_SIZE, GRID_SIZE);
+
+    // go from checking if its hit gameover
    
     }
     
@@ -31,7 +37,8 @@ function snake() {
     fill(255);
 
     rect(headX, headY, GRID_SIZE, GRID_SIZE);
-    headX += GRID_SIZE;
+    headX += GRID_SIZE * xDir;
+    headY += GRID_SIZE * yDir;
 
     if (headX >= width) {
         headX = width - GRID_SIZE;
@@ -41,29 +48,37 @@ function snake() {
         
 function keyPressed() {
     if (keyCode === UP_ARROW) {
-        headX -= GRID_SIZE;
+        xDir = 0;
+        yDir = -1;  // Y
     } 
     if (keyCode === DOWN_ARROW) {
-        headY += GRID_SIZE;
+        xDir = 0;
+        yDir = 1; //y
     }
     if (keyCode === LEFT_ARROW) {
-        headX -= GRID_SIZE;
+        xDir = -1;
+        yDir = 0; //x
     }
     if (keyCode === RIGHT_ARROW) {
-        headX += GRID_SIZE;
+        xDir = 1;
+        yDir = 0;  // x
     }
 
     if (key === 'w' || key === 'W') {
-        headY -= GRID_SIZE;
+        xDir = 0;
+        yDir = -1;
     } 
     if (key === 's' || key === 'S') {
-        headY += GRID_SIZE;
+        xDir = 0;
+        yDir = 1;
     }
     if (key === 'a' || key === 'A') {
-        headX -= GRID_SIZE;
+        xDir = -1;
+        yDir = 0;
     }
     if (key === 'd' || key === 'D') {
-        headX += GRID_SIZE;
+        xDir = 1;
+        yDir = 0;
     }
 }
     
