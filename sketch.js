@@ -9,6 +9,8 @@ let randomCellFloor;
 let xDir = 1;
 let yDir = 0;
 let gameOver = false
+let speedX;
+let speedY;
 
 
 
@@ -20,16 +22,30 @@ function setup() {
        foodX = randomCellFloor * GRID_SIZE + GRID_SIZE / 2;
        foodY = randomCellFloor * GRID_SIZE + GRID_SIZE / 2;
     frameRate(3);
-    keyPressed();
+    //keyPressed() i dont know why this doesnt need to be here but it works
+
     
 }
 
 function draw() {
     background(0);
-    snake();
     ellipse(foodX, foodY, GRID_SIZE, GRID_SIZE);
 
-    // go from checking if its hit gameover
+    if (!gameOver) {  // if the snake has not hit anything, keep moving (by calling the snake function)
+        snake();
+    }
+
+     if (headX >= width || headX < 0 || headY >= height || headY < 0) { // if the snake hits the wall, framerate to 0. 
+        frameRate(0);
+        gameOver = true;
+        textSize(32);
+        fill(255, 0, 0);
+        text('Game Over', width / 2 - 80, height / 2);
+
+
+    }
+
+
    
     }
     
@@ -40,9 +56,6 @@ function snake() {
     headX += GRID_SIZE * xDir;
     headY += GRID_SIZE * yDir;
 
-    if (headX >= width) {
-        headX = width - GRID_SIZE;
-    }
 
 }
         
