@@ -24,6 +24,8 @@ function setup() {
     
     foodX = newFoodCoordinate();
     foodY = newFoodCoordinate();
+    print(foodX)
+
     frameRate(3);
     //keyPressed() i dont know why this doesnt need to be here but it works
 }
@@ -33,11 +35,16 @@ function draw() {
     background(0);
     ellipse(foodX, foodY, GRID_SIZE, GRID_SIZE);
     isgameOver();
+    isSnakeOver();
 }  
 
 
 
-//GAME OVER
+
+/**
+ * checks if the snake has hit a wall
+ * @returns game over, if it has hit a wall, and continues like normal if not.
+ */
 function isgameOver(){
     if (!gameOver) {  // if the snake has not hit anything, keep moving (by calling the snake function)
         snake();
@@ -50,13 +57,16 @@ function isgameOver(){
         textSize(32);
         fill(255, 0, 0);
         text('Game Over', width / 2 - 80, height / 2);
-    return gameOver
+    return gameOver;
 }
 }
 
 
-//FOOD
 
+/**
+ * places food on a random cell on the canvas
+ * @returns the food in a random place
+ */
 function newFoodCoordinate(){
     randomCell = random(numberOfCells);
     randomCellFloor = floor(randomCell);
@@ -65,7 +75,9 @@ return randomCellFloor * GRID_SIZE + GRID_SIZE / 2;
 
 }
 
-    //snake
+/**
+ * snake (lol)
+ */
 function snake() {
     fill(255);
 
@@ -76,8 +88,9 @@ function snake() {
 
 }
 
-//arrows
-        
+/**
+ * checks if direction has changed if player presses controls
+ */
 function keyPressed() {
     if (keyCode === UP_ARROW) {
         xDir = 0;
@@ -113,7 +126,13 @@ function keyPressed() {
         yDir = 0;
     }
 }
-    
-    
 
+
+function isSnakeOver() {
+ if (headX <= foodX && headX + GRID_SIZE > foodX && headY <= foodY && headY + GRID_SIZE > foodY){
+    // idk do this yourself
+ }
+    
+}
+ 
 
