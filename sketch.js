@@ -1,11 +1,15 @@
 const GRID_SIZE = 20;
+let width = 600;
+let height = 600;
 let headX = 40;
 let headY = 40;
 let foodX;
 let foodY;
-let numberOfCells = 600 / GRID_SIZE;
-let randomCell ; 
+// food 
+let numberOfCells = width / GRID_SIZE;
+let randomCell; 
 let randomCellFloor; 
+//direction
 let xDir = 1;
 let yDir = 0;
 let gameOver = false
@@ -17,38 +21,51 @@ let speedY;
 
 function setup() {
     createCanvas(600, 600);
-    randomCell = random(numberOfCells);
-    randomCellFloor = floor(randomCell);
-       foodX = randomCellFloor * GRID_SIZE + GRID_SIZE / 2;
-       foodY = randomCellFloor * GRID_SIZE + GRID_SIZE / 2;
+    
+    foodX = newFoodCoordinate();
+    foodY = newFoodCoordinate();
     frameRate(3);
     //keyPressed() i dont know why this doesnt need to be here but it works
-
-    
 }
+
 
 function draw() {
     background(0);
     ellipse(foodX, foodY, GRID_SIZE, GRID_SIZE);
+    isgameOver();
+}  
 
+
+
+//GAME OVER
+function isgameOver(){
     if (!gameOver) {  // if the snake has not hit anything, keep moving (by calling the snake function)
         snake();
+
     }
 
-     if (headX >= width || headX < 0 || headY >= height || headY < 0) { // if the snake hits the wall, framerate to 0. 
+    if (headX >= width || headX < 0 || headY >= height || headY < 0) { // if the snake hits the wall, framerate to 0. 
         frameRate(0);
         gameOver = true;
         textSize(32);
         fill(255, 0, 0);
         text('Game Over', width / 2 - 80, height / 2);
+    return gameOver
+}
+}
 
 
-    }
+//FOOD
 
+function newFoodCoordinate(){
+    randomCell = random(numberOfCells);
+    randomCellFloor = floor(randomCell);
 
-   
-    }
-    
+return randomCellFloor * GRID_SIZE + GRID_SIZE / 2;
+
+}
+
+    //snake
 function snake() {
     fill(255);
 
@@ -58,6 +75,8 @@ function snake() {
 
 
 }
+
+//arrows
         
 function keyPressed() {
     if (keyCode === UP_ARROW) {
@@ -96,9 +115,5 @@ function keyPressed() {
 }
     
     
-
-
-
-
 
 
