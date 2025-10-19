@@ -130,7 +130,8 @@ function keyPressed() {
 
 function isSnakeOver() {
  if (headX <= foodX && headX + GRID_SIZE > foodX && headY <= foodY && headY + GRID_SIZE > foodY){
-    // idk do this yourself
+    foodX = newFoodCoordinate();
+    foodY = newFoodCoordinate();
  }
     
 }
