@@ -24,8 +24,7 @@ function setup() {
     
     foodX = newFoodCoordinate();
     foodY = newFoodCoordinate();
-    print(foodX)
-
+    print(foodX);
     frameRate(3);
 }
 
@@ -85,8 +84,8 @@ function snake() {
     }
 
    // rect(snakeX[0], snakeY[0], GRID_SIZE, GRID_SIZE);
-   // snakeX[0] += GRID_SIZE * xDir;
-   // snakeY[0] += GRID_SIZE * yDir;
+   snakeX[0] += GRID_SIZE * xDir;
+   snakeY[0] += GRID_SIZE * yDir;
 
 
 }
@@ -135,10 +134,12 @@ function isSnakeOver() {
  if (snakeX[0] <= foodX && snakeX[0] + GRID_SIZE > foodX && snakeY[0] <= foodY && snakeY[0] + GRID_SIZE > foodY){
     foodX = newFoodCoordinate();
     foodY = newFoodCoordinate();
+    addSegment();
  }
     
 }
 
 function addSegment() {
-    
-}
+    snakeX.push(snakeX[snakeX.length - 1]);
+    snakeY.push(snakeY[snakeY.length - 1]);
+  }
