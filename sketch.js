@@ -1,8 +1,8 @@
 const GRID_SIZE = 20;
 let width = 600;
 let height = 600;
-let headX = 40;
-let headY = 40;
+let snakeX = [40];
+let snakeY = [40];
 let foodX;
 let foodY;
 // food 
@@ -27,7 +27,6 @@ function setup() {
     print(foodX)
 
     frameRate(3);
-    //keyPressed() i dont know why this doesnt need to be here but it works
 }
 
 
@@ -36,6 +35,7 @@ function draw() {
     ellipse(foodX, foodY, GRID_SIZE, GRID_SIZE);
     isgameOver();
     isSnakeOver();
+    
 }  
 
 
@@ -51,7 +51,7 @@ function isgameOver(){
 
     }
 
-    if (headX >= width || headX < 0 || headY >= height || headY < 0) { // if the snake hits the wall, framerate to 0. 
+    if (snakeX[0] >= width || snakeX[0] < 0 || snakeY[0] >= height || snakeY[0] < 0) { // if the snake hits the wall, framerate to 0. 
         frameRate(0);
         gameOver = true;
         textSize(32);
@@ -80,10 +80,13 @@ return randomCellFloor * GRID_SIZE + GRID_SIZE / 2;
  */
 function snake() {
     fill(255);
+    for (let i = 0; i < snakeX.length; i++) {
+        rect(snakeX[i], snakeY[i], GRID_SIZE, GRID_SIZE);
+    }
 
-    rect(headX, headY, GRID_SIZE, GRID_SIZE);
-    headX += GRID_SIZE * xDir;
-    headY += GRID_SIZE * yDir;
+   // rect(snakeX[0], snakeY[0], GRID_SIZE, GRID_SIZE);
+   // snakeX[0] += GRID_SIZE * xDir;
+   // snakeY[0] += GRID_SIZE * yDir;
 
 
 }
@@ -129,11 +132,13 @@ function keyPressed() {
 
 
 function isSnakeOver() {
- if (headX <= foodX && headX + GRID_SIZE > foodX && headY <= foodY && headY + GRID_SIZE > foodY){
+ if (snakeX[0] <= foodX && snakeX[0] + GRID_SIZE > foodX && snakeY[0] <= foodY && snakeY[0] + GRID_SIZE > foodY){
     foodX = newFoodCoordinate();
     foodY = newFoodCoordinate();
  }
     
 }
- 
 
+function addSegment() {
+    
+}
