@@ -25,7 +25,7 @@ function setup() {
     foodX = newFoodCoordinate();
     foodY = newFoodCoordinate();
     print(foodX);
-    frameRate(3);
+    frameRate(5);
 }
 
 
@@ -78,17 +78,24 @@ return randomCellFloor * GRID_SIZE + GRID_SIZE / 2;
  * snake (lol)
  */
 function snake() {
-    fill(255);
-    for (let i = 0; i < snakeX.length; i++) {
-        rect(snakeX[i], snakeY[i], GRID_SIZE, GRID_SIZE);
-    }
+  // move the body (from tail to head)
+  for (let i = snakeX.length - 1; i > 0; i--) {
+    snakeX[i] = snakeX[i - 1];
+    snakeY[i] = snakeY[i - 1];
+  }
 
-   // rect(snakeX[0], snakeY[0], GRID_SIZE, GRID_SIZE);
-   snakeX[0] += GRID_SIZE * xDir;
-   snakeY[0] += GRID_SIZE * yDir;
+  // move the head
+  snakeX[0] += GRID_SIZE * xDir;
+  snakeY[0] += GRID_SIZE * yDir;
 
+  // draw everything
+  fill(255);
+  for (let i = 0; i < snakeX.length; i++) {
+    rect(snakeX[i], snakeY[i], GRID_SIZE, GRID_SIZE);
+  }
 
 }
+
 
 /**
  * checks if direction has changed if player presses controls
