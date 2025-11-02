@@ -3,9 +3,8 @@ let width = 600;
 let height = 600;
 let snakeX = [40];
 let snakeY = [40];
-let foodX;
-let foodY;
-// food 
+let food = {};
+
 let numberOfCells = width / GRID_SIZE;
 let randomCell; 
 let randomCellFloor; 
@@ -21,17 +20,20 @@ let speedY;
 
 function setup() {
     createCanvas(600, 600);
-    
-    foodX = newFoodCoordinate();
-    foodY = newFoodCoordinate();
-    print(foodX);
+
+      food = {
+        x: newFoodCoordinate(),
+        y: newFoodCoordinate()
+    };
+
+    print(food.x);
     frameRate(5);
 }
 
 
 function draw() {
     background(0);
-    ellipse(foodX, foodY, GRID_SIZE, GRID_SIZE);
+    ellipse(food.x, food.y, GRID_SIZE, GRID_SIZE);
     isgameOver();
     isSnakeOver();
     
@@ -138,9 +140,9 @@ function keyPressed() {
 
 
 function isSnakeOver() {
- if (snakeX[0] <= foodX && snakeX[0] + GRID_SIZE > foodX && snakeY[0] <= foodY && snakeY[0] + GRID_SIZE > foodY){
-    foodX = newFoodCoordinate();
-    foodY = newFoodCoordinate();
+ if (snakeX[0] <= food.x && snakeX[0] + GRID_SIZE > food.x && snakeY[0] <= food.y && snakeY[0] + GRID_SIZE > food.y){
+    food.x = newFoodCoordinate();
+    food.y = newFoodCoordinate();
     addSegment();
  }
     
