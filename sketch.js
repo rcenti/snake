@@ -28,6 +28,7 @@ function setup() {
 
     print(food.x);
     frameRate(5);
+
 }
 
 
@@ -58,6 +59,7 @@ function isgameOver(){
         textSize(32);
         fill(255, 0, 0);
         text('Game Over', width / 2 - 80, height / 2);
+        text('Press Space to Restart', width / 2 - 140, height / 2 + 40);
     return gameOver;
 }
 }
@@ -103,6 +105,11 @@ function snake() {
  * checks if direction has changed if player presses controls
  */
 function keyPressed() {
+    if (gameOver && keyCode === 32 ){
+        restart();
+    }
+
+
     if (keyCode === UP_ARROW) {
         xDir = 0;
         yDir = -1;  // Y
@@ -152,3 +159,20 @@ function addSegment() {
     snakeX.push(snakeX[snakeX.length - 1]);
     snakeY.push(snakeY[snakeY.length - 1]);
   }
+
+
+function restart() {
+   if (gameOver && keyCode === 32 ){
+    snakeX = [40];
+    snakeY = [40];
+    food = {
+        x: newFoodCoordinate(),
+        y: newFoodCoordinate()
+    };
+    xDir = 1;
+    yDir = 0;
+    gameOver = false;
+    frameRate(5);
+   }
+
+}
